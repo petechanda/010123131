@@ -1,6 +1,6 @@
 ###################################################################
-# File: pygame_camera_demo-1.py
-# Date: 2020-07-25
+# Student ID : 6201012630029
+# Pygame_Camera_Assignment 1
 ###################################################################
 import pygame
 import pygame.camera
