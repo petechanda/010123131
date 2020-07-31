@@ -1,6 +1,6 @@
 ###################################################################
 # Student ID : 6201012630029
-# Pygame_Camera_Assignment 1
+# Pygame_Camera_Assignment 2
 ###################################################################
 import pygame
 import pygame.camera
