@@ -63,10 +63,6 @@ while running:
             exp_var = '-({})'.format(event)
     elif event == '=':
         print(exp_var)
-        # make fn
 
 window.close()
 
-# +/-
-# ตัวบวกที่2ใส่ได้ตัวเดียว
-# ทำ fn +-*/
