@@ -162,7 +162,3 @@ while running:
         symb = ''
 
 window.close()
-
-# +/-
-# ตัวบวกที่2ใส่ได้ตัวเดียว
-# ทำ fn +-*/
