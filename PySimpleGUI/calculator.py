@@ -26,8 +26,9 @@ layout = [ [sg.InputText(size=(23,1), font='Courier 20', justification='right', 
 # Window('Name',layout,ระยะขอบ=(x,y))
 window = sg.Window('Calculator', layout, margins=(10,10))
 
-exp_lst = []
 exp_var = ''
+symb = ''
+num = []
 running = True
 while running:
     event,values = window.read()
@@ -35,34 +36,133 @@ while running:
         running = False
     elif event in '0123456789.':
         exp_var += event
-        if exp_var[len(exp_var)-2] in '+-*/':
-            window['screen'].update(exp_var[len(exp_var)-1:])
-        else:
-            window['screen'].update(exp_var)
+        window['screen'].update(exp_var)
         #print('Enter',event)
-    elif event in '+-*/':
-        if exp_var[len(exp_var)-1] in '+-*/':
-            exp_var = exp_var[:len(exp_var)-1]
-        exp_var += event
-    elif event == '%':
-        if '+' not in exp_var or '-' not in exp_var or '*' not in exp_var or '/' not in exp_var:
-            ans = int(exp_var)/100
+    elif event == '+':
+        num.append(float(exp_var))
+        if symb == '+':
+            ans = num[0]+num[1]
+            num = [ans]
             window['screen'].update(ans)
-            exp_var = ''
-        elif '+' in exp_var or '-' in exp_var or '*' in exp_var or '/' in exp_var:
-            exp_var += event
+        elif symb == '-':
+            ans = num[0]-num[1]
+            num = [ans]
+            window['screen'].update(ans)
+        elif symb == '*':
+            ans = num[0]*num[1]
+            num = [ans]
+            window['screen'].update(ans)
+        elif symb == '/':
+            ans = num[0]/num[1]
+            num = [ans]
+            window['screen'].update(ans)
+        symb = '+'
+        exp_var = ''
+    elif event == '-':
+        num.append(float(exp_var))
+        if symb == '+':
+            ans = num[0]+num[1]
+            num = [ans]
+            window['screen'].update(ans)
+        elif symb == '-':
+            ans = num[0]-num[1]
+            num = [ans]
+            window['screen'].update(ans)
+        elif symb == '*':
+            ans = num[0]*num[1]
+            num = [ans]
+            window['screen'].update(ans)
+        elif symb == '/':
+            ans = num[0]/num[1]
+            num = [ans]
+            window['screen'].update(ans)
+        symb = '-'
+        exp_var = ''
+    elif event == '*':
+        num.append(float(exp_var))
+        if symb == '+':
+            ans = num[0]+num[1]
+            num = [ans]
+            window['screen'].update(ans)
+        elif symb == '-':
+            ans = num[0]-num[1]
+            num = [ans]
+            window['screen'].update(ans)
+        elif symb == '*':
+            ans = num[0]*num[1]
+            num = [ans]
+            window['screen'].update(ans)
+        elif symb == '/':
+            ans = num[0]/num[1]
+            num = [ans]
+            window['screen'].update(ans)
+        symb = '*'
+        exp_var = ''
+    elif event == '/':
+        num.append(float(exp_var))
+        if symb == '+':
+            ans = num[0]+num[1]
+            num = [ans]
+            window['screen'].update(ans)
+        elif symb == '-':
+            ans = num[0]-num[1]
+            num = [ans]
+            window['screen'].update(ans)
+        elif symb == '*':
+            ans = num[0]*num[1]
+            num = [ans]
+            window['screen'].update(ans)
+        elif symb == '/':
+            ans = num[0]/num[1]
+            num = [ans]
+            window['screen'].update(ans)
+        symb = '/'
+        exp_var = ''
+    elif event == '%':
+        if symb == '':
+            ans = float(exp_var)/100
+            window['screen'].update(ans)
+            exp_var = str(ans)
+        else:
+            num.append(float(exp_var))
+            if symb == '+':
+                ans = num[0]+(num[1]*num[0]/100)
+            elif symb == '-':
+                ans = num[0]-(num[1]*num[0]/100)
+            elif symb == '*':
+                ans = num[0]*num[1]/100
+            elif symb == '/':
+                ans = num[0]*100/num[1]
+            window['screen'].update(ans)
+            exp_var = str(ans)
+            num = []
+            symb = ''
     elif event == 'AC':
         window['screen'].update('')
         exp_var = ''
+        num = []
+        symb = ''
     elif event == '+/-':
-        if '+' not in exp_var or '-' not in exp_var or '*' not in exp_var or '/' not in exp_var:
-            ans = int(exp_var)*-1
-            window['screen'].update(ans)
-            exp_var = ''
-        elif '+' in exp_var or '-' in exp_var or '*' in exp_var or '/' in exp_var:
-            exp_var = '-({})'.format(event)
+        exp_var = float(exp_var)*-1
+        window['screen'].update(exp_var)
+        exp_var = str(exp_var)
     elif event == '=':
-        print(exp_var)
+        num.append(float(exp_var))
+        if symb == '+':
+            ans = num[0]+num[1]
+        elif symb == '-':
+            ans = num[0]-num[1]
+        elif symb == '*':
+            ans = num[0]*num[1]
+        elif symb == '/':
+            ans = num[0]/num[1]    
+        window['screen'].update(ans)
+        exp_var = str(ans)
+        num = []
+        symb = ''
 
 window.close()
 
+# +/-
+# ตัวบวกที่2ใส่ได้ตัวเดียว
+# ทำ fn +-*/
